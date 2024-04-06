@@ -22,9 +22,10 @@ public class ViewBorrowingHistory {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, borrowerId);
             ResultSet rs = stmt.executeQuery();
-
+            boolean hasBorrowingHistory = false;
             System.out.println("Borrowing History for Borrower ID: " + borrowerId);
             while (rs.next()) {
+                hasBorrowingHistory = true;
                 int transactionId = rs.getInt("transaction_id");
                 String title = rs.getString("title");
                 Date borrowDate = rs.getDate("borrow_date");
@@ -35,6 +36,9 @@ public class ViewBorrowingHistory {
                 System.out.println("Borrow Date: " + borrowDate);
                 System.out.println("Return Date: " + (returnDate != null ? returnDate : "Not Returned Yet"));
                 System.out.println();
+            }
+            if (!hasBorrowingHistory) {
+                System.out.println("There are no books borrowed by this borrower.");
             }
         } catch (SQLException e) {
             e.printStackTrace();

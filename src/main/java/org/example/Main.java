@@ -25,7 +25,12 @@ public class Main{
                     AddBook.addBook();
                     break;
                 case 2:
-                    AddBorrower.addBorrower();
+                    int borrowerId = AddBorrower.addBorrower();
+                    if (borrowerId != -1) {
+                        // Borrower added successfully, you can use the borrowerId for further operations
+                    } else {
+                        System.out.println("Failed to add borrower.");
+                    }
                     break;
                 case 3:
                     BorrowBook.borrowBook();

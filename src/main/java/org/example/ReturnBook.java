@@ -22,6 +22,7 @@ public class ReturnBook {
             try (PreparedStatement updateCopyStmt = conn.prepareStatement(updateCopySQL)) {
                 updateCopyStmt.setInt(1, transactionId);
                 updateCopyStmt.executeUpdate();
+                System.out.println("Successfully return the book");
             }
         } catch (SQLException e) {
             e.printStackTrace();
